@@ -10,7 +10,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "LegalDoc AI - Legal Document Management System",
   description: "AI-powered legal document creation and management system with bilingual support",
-  generator: "v0.app",
+
 }
 
 export default function RootLayout({

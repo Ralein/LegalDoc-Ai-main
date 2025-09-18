@@ -405,14 +405,7 @@ function EditorContent() {
                     </Button>
                   </div>
 
-                  <div className="flex items-center">
-                    <AIWritingTools
-                      selectedText={selectedText}
-                      onApplyChange={handleAIChange}
-                      onClose={() => setSelectedText("")}
-                      disabled={!selectedText.trim()}
-                    />
-                  </div>
+                 
                 </div>
               </CardHeader>
               <CardContent className="p-0">
