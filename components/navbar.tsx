@@ -4,11 +4,21 @@ import { Button } from "@/components/ui/button"
 import { Moon, Sun, Globe, Scale } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useLanguage } from "@/lib/language-context"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function Navbar() {
   const { setTheme, theme } = useTheme()
   const { language, setLanguage, t } = useLanguage()
+
+  const handleLanguageChange = (newLanguage: "en" | "ta") => {
+    console.log('Changing language to:', newLanguage) // Debug log
+    setLanguage(newLanguage)
+  }
+
+  const handleThemeToggle = () => {
+    const newTheme = theme === "light" ? "dark" : "light"
+    console.log('Changing theme to:', newTheme) // Debug log
+    setTheme(newTheme)
+  }
 
   return (
     <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -24,25 +34,24 @@ export function Navbar() {
 
         <div className="flex flex-1 items-center justify-end space-x-2">
           {/* Language Toggle */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-9">
-                <Globe className="h-4 w-4" />
-                <span className="ml-2">{language === "en" ? "English" : "தமிழ்"}</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setLanguage("en")}>English</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setLanguage("ta")}>தமிழ் (Tamil)</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-9 hover:bg-accent hover:text-accent-foreground"
+            onClick={() => handleLanguageChange(language === "en" ? "ta" : "en")}
+          >
+            <Globe className="h-4 w-4" />
+            <span className="ml-2">
+              {language === "en" ? "English" : "தமிழ்"}
+            </span>
+          </Button>
 
           {/* Theme Toggle */}
           <Button
             variant="ghost"
             size="sm"
-            className="h-9"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="h-9 hover:bg-accent hover:text-accent-foreground"
+            onClick={handleThemeToggle}
           >
             <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
